@@ -16,10 +16,10 @@ my $builder = My::ModuleBuild->new(
         'Capture::Tiny'            => 0,
         'File::ShareDir'           => 1.03,
         'File::chdir'              => 0,
-        'perl'                     => 5.006
+        'perl'                     => 5.008
     },
     requires => {
-        'perl'           => '5.10.0',
+        'perl'           => '5.8.0',
         'parent'         => 0,
         'Alien::Base'    => 0,
         'File::ShareDir' => 1.03,
