@@ -5,6 +5,11 @@ our $VERSION = 0.003_000;
 
 use lib qw{inc};
 use My::ModuleBuild;
+use Config;
+
+my $cxx = 'g++';
+$cxx = 'c++' if $^O eq 'freebsd';
+$cxx = 'clang++' if $Config{cc} =~ /clang/;
 
 my $builder = My::ModuleBuild->new(
     module_name        => 'Alien::astyle',
@@ -12,6 +17,9 @@ my $builder = My::ModuleBuild->new(
     dist_author        => 'William N. Braswell, Jr. <wbraswell@cpan.org>',
     dist_version       => 0.001_000,
     license            => 'perl',
+    alien_bin_requires => {
+        'Alien::gmake' => '0.11',
+    },
     configure_requires => {
         'Alien::Base::ModuleBuild' => 0.016,
         'Capture::Tiny'            => 0,
@@ -30,10 +38,10 @@ my $builder = My::ModuleBuild->new(
         'File::ShareDir' => 1.03,
     },
     alien_build_commands => [
-        'make --directory=build/gcc'
+        "%{gmake} --directory=build/gcc CXX=$cxx"
     ],
     alien_install_commands => [
-        'make --directory=build/gcc prefix=%s install'
+        "%{gmake} --directory=build/gcc CXX=$cxx prefix=%s install"
     ],
     alien_name       => 'astyle',
     alien_repository => [
