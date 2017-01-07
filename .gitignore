@@ -12,7 +12,7 @@
 # [ CPAN Build & Distribution ]
 # NEED UPDATE, CORRELATION #aa000: list of CPAN files & directories to delete/exclude in .gitignore, and MANIFEST.SKIP
 # MANIFEST.SKIP is not auto-generated, do not exclude
-/MANIFEST
+# MANIFEST is auto-generated, but `perl Build.PL` complains without it, do not exclude
 /MANIFEST.bak
 /META.*
 /MYMETA.*

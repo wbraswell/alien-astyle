@@ -1,0 +1,6 @@
+Build.PL
+inc/My/ModuleBuild.pm
+lib/Alien/astyle.pm
+MANIFEST			This list of files
+README.md
+t/01_use.t
