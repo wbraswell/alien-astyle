@@ -29,6 +29,10 @@ swp$
 ^backup
 \bAlien-astyle-
 
+# [ Alien::astyle Development ]
+^script\/dev
+^docs\/dev
+
 # [ Module::Build ]
 \bBuild$
 \bBuild.bat$
@@ -36,3 +40,9 @@ swp$
 \bBuild.COM$
 \bBUILD.COM$
 \bbuild.com$
+
+# [ Dist::Zilla ]
+^dist.ini
+^Build.PL.manual
+
+

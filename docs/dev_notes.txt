@@ -1,0 +1,54 @@
+##########################################################################################
+# CPAN DISTRIBUTION
+##########################################################################################
+
+# DEV NOTE: dist.ini uses Dist::Zilla to interface with PAUSE & CPAN
+# Build.PL uses Module::Builder???
+
+# UPDATE VERSION NUMBERS
+$ vi Changes
+    # version, date, name, notes
+$ vi lib/Alien/astyle.pm
+    # $VERSION
+
+# CREATE DISTZILLA FILES
+$ dzil clean
+$ dzil release
+
+# FIX BROKEN DISTZILLA FILES
+$ cd Alien-astyle-*
+$ rm Makefile.PL
+$ vi MANIFEST
+    remove Makefile.PL
+$ rm Build.PL
+$ cp ../Build.PL.manual ./Build.PL
+# DEV NOTE, CORRELATION #aa001: must preserve six numeric digits after the decimal point in the file name
+$ vi META.yml
+    version : "X.XXXXXX",
+
+# TEST FIXED DISTZILLA FILES
+$ perl Build.PL
+$ Build test
+$ Build install
+$ perl -e 'use Alien::astyle; use Env qw(@PATH); unshift @PATH, Alien::astyle->bin_dir(); print `astyle --version`, "\n";'
+$ Build realclean
+
+# DELETE & RECREATE TARBALL, DELETE DIST & BUILD DIRECTORIES
+# DEV NOTE, CORRELATION #aa001: must preserve six numeric digits after the decimal point in the file name
+$ mv ./Alien-astyle-VERSION_SHORT ./Alien-astyle-VERSION_LONG
+$ rm ./Alien-astyle-*.tar.gz
+$ tar -czvf ./Alien-astyle-VERSION_LONG.tar.gz ./Alien-astyle-VERSION_LONG
+$ rm -Rf ./Alien-astyle-VERSION_LONG
+$ dzil clean
+
+# UPLOAD TO GITHUB & CPAN
+$ mv Alien-astyle*.tar.gz backup/
+$ git add -A; git commit -a
+    # CPAN Release, vX.Y00000; Codename FOO, BAR Edition
+$ git push origin master
+$ apt-get install libssl-dev
+    # to avoid 'fatal error: openssl/err.h: No such file or directory' during install of Net::SSLeay, subdep of CPAN::Uploader
+$ cpanm CPAN::Uploader
+$ cpan-upload -v -u WBRASWELL --dry-run backup/Alien-astyle-VERSION.tar.gz
+    # ARE YOU SURE YOU WISH TO PROCEED?!?
+$ cpan-upload -v -u WBRASWELL backup/Alien-astyle-VERSION.tar.gz

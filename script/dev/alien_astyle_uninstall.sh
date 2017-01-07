@@ -13,4 +13,3 @@ rm -Rf $PERL5DIR/man/man3/Alien::astyle::ConfigData.3pm
 rm -Rf $PERL5DIR/man/man3/Alien::astyle.3pm
 rm -Rf $PERL5DIR/lib/perl5/x86_64-linux-gnu-thread-multi/auto/Alien/astyle/.packlist
 rm -Rf $PERL5DIR/lib/perl5/x86_64-linux-gnu-thread-multi/auto/Alien/astyle
-
