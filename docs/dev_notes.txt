@@ -12,6 +12,7 @@ $ vi lib/Alien/astyle.pm
     # $VERSION
 
 # CREATE DISTZILLA FILES
+$ mv Build.PL Build.PL.manual
 $ dzil clean
 $ dzil release
 
@@ -40,6 +41,7 @@ $ rm ./Alien-astyle-*.tar.gz
 $ tar -czvf ./Alien-astyle-VERSION_LONG.tar.gz ./Alien-astyle-VERSION_LONG
 $ rm -Rf ./Alien-astyle-VERSION_LONG
 $ dzil clean
+$ mv Build.PL.manual Build.PL
 
 # UPLOAD TO GITHUB & CPAN
 $ mv Alien-astyle*.tar.gz backup/
