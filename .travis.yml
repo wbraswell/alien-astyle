@@ -12,6 +12,14 @@ perl:
   - "5.22"
   - "5.24"
 
+install:
+    - cpanm --verbose --installdeps .
+
+script:
+    - perl Build.PL
+    - Build
+    - Build test
+
 notifications:
   irc:
     channels:
