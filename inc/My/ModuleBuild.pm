@@ -17,15 +17,15 @@ sub alien_check_installed_version {
         print {*STDERR} 'WARNING WAAMBIV00: Alien::astyle experienced an error while attempting to determine installed version...', 
             "\n", $version_stderr, "\n", 'Trying to continue...', "\n";
     }
-    if ((scalar @{$version_output}) != 1) {
+    if ((scalar @{$version_stdout}) != 1) {
         print {*STDERR} 'WARNING WAAMBIV01: Alien::astyle received too much output while attempting to determine installed version...', 
-            "\n", $version_output, "\n", 'Trying to continue...', "\n";
+            "\n", $version_stdout, "\n", 'Trying to continue...', "\n";
     }
 
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version_output = ', $version_output, "\n";
-    if ((defined $version_output) and
-        ($version_output =~ /^Artistic Style Version/) and 
-        ($version_output =~ /([0-9\.]+)$/)) {
+    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version_stdout = ', $version_stdout, "\n";
+    if ((defined $version_stdout) and
+        ($version_stdout =~ /^Artistic Style Version/) and 
+        ($version_stdout =~ /([0-9\.]+)$/)) {
         my $version = $1;
         print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
         return $version;

@@ -1,0 +1,21 @@
+# [[[ EXCLUDE ALL AUTOMATICALLY-GENERATED FILES FROM GITHUB ]]]
+# [ GitHub ]
+# .gitignore is not auto-generated, do not exclude self
+
+# [ Module::Build ]
+/_build/
+
+# [ CPAN Build & Distribution ]
+# NEED UPDATE, CORRELATION #rp006: list of CPAN files & directories to delete/exclude in Makefile.PL, .gitignore, and MANIFEST.SKIP
+# MANIFEST.SKIP is not auto-generated, do not exclude
+/MANIFEST
+/MANIFEST.bak
+/META.*
+/MYMETA.*
+/Build
+/Build.old
+/blib/
+/pm_to_blib
+
+# [ POD ]
+/pod2htmd.tmp
