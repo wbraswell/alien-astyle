@@ -1,5 +1,5 @@
 language: perl
-# v0.002_000
+# v0.003_000
 
 perl:
   - "5.8"
@@ -13,6 +13,8 @@ perl:
   - "5.24"
 
 install:
+    # NEED ANSWER: why isn't A::B::MB auto-installed by --installdeps?
+    - cpanm Alien::Base::ModuleBuild
     - cpanm --verbose --installdeps .
 
 script:
