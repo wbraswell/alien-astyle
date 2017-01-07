@@ -1,5 +1,5 @@
 language: perl
-# v0.003_000
+# v0.004_000
 
 perl:
   - "5.8"
@@ -19,9 +19,9 @@ install:
 
 script:
     - perl Build.PL
-    - Build
-    - Build test
-    - Build install
+    - ./Build
+    - ./Build test
+    - ./Build install
     - perl -e 'use Alien::astyle; use Env qw(@PATH); unshift @PATH, Alien::astyle->bin_dir(); print `astyle --version`, "\n";'
 
 notifications:
