@@ -1,6 +1,7 @@
-package Alien::astyle;
 use strict;
 use warnings;
+package Alien::astyle;
+
 our $VERSION = 0.001_000;
 
 use base qw( Alien::Base );
@@ -41,11 +42,11 @@ This package can be used by other CPAN modules that require astyle.
 
 =head1 AUTHOR
 
-Will Braswell <wbraswell@cpan.org>
+William N. Braswell, Jr. <wbraswell@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2017 by Will Braswell;
+This software is copyright (c) 2017 by William N. Braswell, Jr.;
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

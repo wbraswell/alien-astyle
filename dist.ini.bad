@@ -5,8 +5,6 @@ copyright_holder = William N. Braswell, Jr.
 copyright_year   = 2017
 version          = 0.001
 
-[@Basic]
-
 [MetaResources]
 bugtracker.web = https://github.com/wbraswell/alien-astyle-latest/issues
 homepage = https://metacpan.org/pod/alien::astyle::latest
