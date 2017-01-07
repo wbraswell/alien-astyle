@@ -1,8 +1,7 @@
 use strict;
 use warnings;
-our $VERSION = 0.001_000;
+our $VERSION = 0.002_000;
 
-#use Module::Build 0.28;
 use lib qw{inc};
 use My::ModuleBuild;
 
@@ -25,12 +24,18 @@ my $builder = My::ModuleBuild->new(
         'Alien::Base'    => 0,
         'File::ShareDir' => 1.03,
     },
+    alien_build_commands => [
+        'make --directory=build/gcc'
+    ],
+    alien_install_commands => [
+        'make --directory=build/gcc prefix=%s install'
+    ],
     alien_name       => 'astyle',
     alien_repository => [
         {   protocol => 'http',
-            host     => 'github.com',
-            location => '/wbraswell/astyle-mirror/blob/master/backup',
-            pattern  => qr/^astyle_([\d\.]+)_linux\.tar\.gz$/,
+            host     => 'wbraswell.github.io',
+            location => '/astyle-mirror/',
+            pattern  => qr/astyle_([\d\.]+)_linux\.tar\.gz$/,
         },
     ],
     meta_merge => {

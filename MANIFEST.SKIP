@@ -1,0 +1,38 @@
+# [[[ EXCLUDE ALL GITHUB, UNUSED, AND AUTOMATICALLY-GENERATED FILES FROM CPAN ]]]
+# v0.002_000
+# [ GitHub & Travis-CI & AppVeyor ]
+^\.git
+^\.gitignore$
+^\.travis\.yml$
+^\appveyor\.yml$
+
+# [ CPAN Build & Distribution ]
+# NEED UPDATE, CORRELATION #aa000: list of CPAN files & directories to delete/exclude in .gitignore, and MANIFEST.SKIP
+# MANIFEST.SKIP is not auto-generated, but should not be distributed to end users
+^MANIFEST\.SKIP$
+# MANIFEST is needed by CPAN, do not exclude
+^MANIFEST\.bak$
+# META.yml & META.json are needed by CPAN, do not exclude
+# MYMETA.* are configuration metadata files
+^MYMETA\.
+^blib
+^pm_to_blib
+
+# [ Temporary Files, Ending With Tilde ~ Or swp ]
+~$
+swp$
+
+# [ POD ]
+^pod2htmd\.tmp$
+
+# [ Alien::astyle Archives ]
+^backup
+\bAlien-astyle-
+
+# [ Module::Build ]
+\bBuild$
+\bBuild.bat$
+\b_build
+\bBuild.COM$
+\bBUILD.COM$
+\bbuild.com$
