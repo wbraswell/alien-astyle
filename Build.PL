@@ -1,0 +1,48 @@
+use strict;
+use warnings;
+our $VERSION = 0.001_000;
+
+#use Module::Build 0.28;
+use lib qw{inc};
+use My::ModuleBuild;
+
+my $builder = My::ModuleBuild->new(
+    module_name        => 'Alien::astyle',
+    dist_abstract      => 'Build & Install the Artistic Style Code Formatter',
+    dist_author        => 'Will Braswell <wbraswell@cpan.org>',
+    dist_version       => 0.001_000,
+    license            => 'perl',
+    configure_requires => {
+        'Alien::Base::ModuleBuild' => 0.016,
+        'Capture::Tiny'            => 0,
+        'File::ShareDir'           => 1.03,
+        'File::chdir'              => 0,
+        'perl'                     => 5.006
+    },
+    requires => {
+        'perl'           => '5.10.0',
+        'parent'         => 0,
+        'Alien::Base'    => 0,
+        'File::ShareDir' => 1.03,
+    },
+    alien_name       => 'astyle',
+    alien_repository => [
+        {   protocol => 'http',
+            host     => 'github.com',
+            location => '/wbraswell/astyle-mirror/blob/master/backup',
+            pattern  => qr/^astyle_([\d\.]+)_linux\.tar\.gz$/,
+        },
+    ],
+    meta_merge => {
+        resources => {
+            repository => 'https://github.com/wbraswell/alien-astyle',
+            bugtracker => 'https://github.com/wbraswell/alien-astyle/issues',
+        },
+    },
+    recursive_test_files => 1,
+    test_requires        => {
+        'Test::More' => "0.94",
+        'perl'       => "5.006"
+    }
+);
+$builder->create_build_script;
