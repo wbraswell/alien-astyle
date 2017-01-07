@@ -3,6 +3,7 @@ use strict;
 use warnings;
 our $VERSION = 0.001_000;
 
+use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
 
 use File::chdir;
