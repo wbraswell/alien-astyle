@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-our $VERSION = 0.002_000;
+our $VERSION = 0.003_000;
 
 use lib qw{inc};
 use My::ModuleBuild;
@@ -17,6 +17,10 @@ my $builder = My::ModuleBuild->new(
         'File::ShareDir'           => 1.03,
         'File::chdir'              => 0,
         'perl'                     => 5.008
+    },
+    test_requires        => {
+        'Test::More' => "0.94",
+        'perl'       => "5.006"
     },
     requires => {
         'perl'           => '5.8.0',
@@ -38,6 +42,7 @@ my $builder = My::ModuleBuild->new(
             pattern  => qr/astyle_([\d\.]+)_linux\.tar\.gz$/,
         },
     ],
+    alien_stage_install => 1,
     meta_merge => {
         resources => {
             repository => 'https://github.com/wbraswell/alien-astyle',
@@ -45,9 +50,5 @@ my $builder = My::ModuleBuild->new(
         },
     },
     recursive_test_files => 1,
-    test_requires        => {
-        'Test::More' => "0.94",
-        'perl'       => "5.006"
-    }
 );
 $builder->create_build_script;
