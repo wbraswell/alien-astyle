@@ -12,12 +12,15 @@ $ vi lib/Alien/astyle.pm
     # $VERSION
 $ vi dist.ini
     version
+$ vi Build.PL
+    dist_version
 
 # CREATE DISTZILLA FILES
 $ mv Build.PL Build.PL.manual
 $ rm MANIFEST
 $ dzil clean
 $ dzil release
+# CHEAT:    mv Build.PL Build.PL.manual; rm MANIFEST; dzil clean; dzil release
 
 # FIX BROKEN DISTZILLA FILES
 $ ./script/dev/alien_astyle_uninstall.sh
@@ -27,9 +30,7 @@ $ vi MANIFEST
     remove Makefile.PL
 $ rm Build.PL
 $ cp ../Build.PL.manual ./Build.PL
-# DEV NOTE, CORRELATION #aa001: must preserve six numeric digits after the decimal point in the file name
-$ vi META.yml
-    version : "X.XXXXXX",
+# CHEAT:    ./script/dev/alien_astyle_uninstall.sh; cd Alien-astyle-*; rm Makefile.PL; vi MANIFEST; rm Build.PL; cp ../Build.PL.manual ./Build.PL
 
 # TEST FIXED DISTZILLA FILES
 $ perl Build.PL
@@ -37,17 +38,17 @@ $ Build test
 $ Build install
 $ perl -e 'use Alien::astyle; use Env qw(@PATH); unshift @PATH, Alien::astyle->bin_dir(); print `astyle --version`, "\n";'
 $ Build realclean
+$ cd ..
+# CHEAT:    perl Build.PL; Build test; Build install; perl -e 'use Alien::astyle; use Env qw(@PATH); unshift @PATH, Alien::astyle->bin_dir(); print `astyle --version`, "\n";'; Build realclean; cd ..
 
 # DELETE & RECREATE TARBALL, DELETE DIST & BUILD DIRECTORIES
-# DEV NOTE, CORRELATION #aa001: must preserve six numeric digits after the decimal point in the file name
-$ cd ..
-$ mv ./Alien-astyle-VERSION_SHORT ./Alien-astyle-VERSION_LONG
 $ rm ./Alien-astyle-*.tar.gz
 $ tar -czvf ./Alien-astyle-VERSION_LONG.tar.gz ./Alien-astyle-VERSION_LONG
 $ rm -Rf ./Alien-astyle-VERSION_LONG
 $ mv Alien-astyle*.tar.gz backup/
 $ dzil clean
 $ mv Build.PL.manual Build.PL
+# MUST EDIT!!! CHEAT:    rm ./Alien-astyle-*.tar.gz; tar -czvf ./Alien-astyle-VERSION_LONG.tar.gz ./Alien-astyle-VERSION_LONG; rm -Rf ./Alien-astyle-VERSION_LONG; mv Alien-astyle*.tar.gz backup/; dzil clean; mv Build.PL.manual Build.PL
 
 # UPLOAD TO GITHUB & CPAN
 $ git add -A; git commit -a
