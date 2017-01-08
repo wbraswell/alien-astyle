@@ -1,5 +1,11 @@
 Revision history for Alien::astyle.
 
+0.002000 2017-01-07
+
+    - Fix Broken CPAN Metadata URLs (Thanks to plicease AKA Graham Ollis)
+    - FreeBSD Support (Thanks to plicease AKA Graham Ollis)
+    - Clang Support (Thanks to plicease AKA Graham Ollis)
+
 0.001000 2017-01-07
 
     - Initial Release!

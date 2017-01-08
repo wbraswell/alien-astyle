@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Alien::astyle;
 
-our $VERSION = 0.001_000;
+our $VERSION = 0.002_000;
 
 use base qw( Alien::Base );
 
@@ -16,15 +16,15 @@ __END__
 
 =head1 NAME
 
-Alien::astyle - Find or build astyle
+Alien::astyle - Find or build astyle, the Artistic Style code formatter
 
 =head1 SYNOPSIS
 
 From a Perl script
 
  use Alien::astyle;
- use Env qw( @PATH );
- unshift @PATH, Alien::astyle->bin_dir;  # astyle is now in your path
+ use Env qw(@PATH);
+ unshift @PATH, Alien::astyle->bin_dir();  # `astyle` command is now in your path
 
 From Alien::Base Build.PL
 

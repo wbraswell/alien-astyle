@@ -10,13 +10,17 @@ $ vi Changes
     # version, date, name, notes
 $ vi lib/Alien/astyle.pm
     # $VERSION
+$ vi dist.ini
+    version
 
 # CREATE DISTZILLA FILES
 $ mv Build.PL Build.PL.manual
+$ rm MANIFEST
 $ dzil clean
 $ dzil release
 
 # FIX BROKEN DISTZILLA FILES
+$ ./script/dev/alien_astyle_uninstall.sh
 $ cd Alien-astyle-*
 $ rm Makefile.PL
 $ vi MANIFEST
@@ -36,15 +40,16 @@ $ Build realclean
 
 # DELETE & RECREATE TARBALL, DELETE DIST & BUILD DIRECTORIES
 # DEV NOTE, CORRELATION #aa001: must preserve six numeric digits after the decimal point in the file name
+$ cd ..
 $ mv ./Alien-astyle-VERSION_SHORT ./Alien-astyle-VERSION_LONG
 $ rm ./Alien-astyle-*.tar.gz
 $ tar -czvf ./Alien-astyle-VERSION_LONG.tar.gz ./Alien-astyle-VERSION_LONG
 $ rm -Rf ./Alien-astyle-VERSION_LONG
+$ mv Alien-astyle*.tar.gz backup/
 $ dzil clean
 $ mv Build.PL.manual Build.PL
 
 # UPLOAD TO GITHUB & CPAN
-$ mv Alien-astyle*.tar.gz backup/
 $ git add -A; git commit -a
     # CPAN Release, vX.Y00000; Codename FOO, BAR Edition
 $ git push origin master
