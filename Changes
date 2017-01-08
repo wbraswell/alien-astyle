@@ -1,5 +1,9 @@
 Revision history for Alien::astyle.
 
+0.003000 2017-01-07
+
+    - Use IPC::Cmd::can_run() To Locate `astyle` Executable Path During Installation
+
 0.002000 2017-01-07
 
     - Fix Broken CPAN Metadata URLs (Thanks to plicease AKA Graham Ollis)

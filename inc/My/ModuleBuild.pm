@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.001_000;
+our $VERSION = 0.002_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -9,15 +9,27 @@ use base qw( Alien::Base::ModuleBuild );
 use File::chdir;
 use Capture::Tiny qw( capture_stderr );
 use Data::Dumper;
+use IPC::Cmd qw(can_run);
 
 sub alien_check_installed_version {
+    # check if `astyle` can be run, if so get path to binary executable
+    my $astyle_path = can_run('astyle');
+    if (not defined $astyle_path) {
+#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), no `astyle` binary found, returning nothing', "\n";
+        return;
+    }
+
+    # run `astyle --version`, check for valid output
     my $version_stdout;
     my $version_stderr = capture_stderr {
-        $version_stdout = [`astyle --version`];
+        $version_stdout = [`$astyle_path --version`];
     };
     if (($version_stderr ne q{}) and
         ($version_stderr !~ m/an\'t\ exec/xms) and
-        ($version_stderr !~ m/o\ such\ file/xms)) {
+        ($version_stderr !~ m/o\ such\ file/xms) and
+        ($version_stderr !~ m/is\ not\ recognized/xms) and # MS Windows in AppVeyor
+        ($version_stderr !~ m/internal\ or\ external\ command/xms) # MS Windows in AppVeyor
+        ) {
         print {*STDERR} 'WARNING WAAMBIV00: Alien::astyle experienced an unrecognized error while attempting to determine installed version...', 
             "\n", $version_stderr, "\n", 'Trying to continue...', "\n";
     }

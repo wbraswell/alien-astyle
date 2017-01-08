@@ -30,6 +30,7 @@ my $builder = My::ModuleBuild->new(
     configure_requires => {
         'Alien::Base::ModuleBuild' => 0.016,
         'Capture::Tiny'            => 0,
+        'IPC::Cmd'                 => 0.96,
         'File::ShareDir'           => 1.03,
         'File::chdir'              => 0,
         'perl'                     => 5.008
