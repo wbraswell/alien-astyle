@@ -16,6 +16,7 @@ my $astyle_path = can_run('astyle');
 ok(defined $astyle_path, '`astyle` binary path is defined');
 isnt($astyle_path, q{}, '`astyle` binary path is not empty');
 
+# run `astyle --version`, check for valid output
 my $version = [ split /\r?\n/, capture_merged { system "$astyle_path --version"; }];
 cmp_ok((scalar @{$version}), '==', 1, '`astyle --version` executes with 1 line of output');
 

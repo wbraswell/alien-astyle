@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.003_000;
+our $VERSION = 0.010_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );

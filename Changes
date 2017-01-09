@@ -1,5 +1,12 @@
 Revision history for Alien::astyle.
 
+0.004000 2017-01-09
+
+    - Use IPC::Cmd::can_run() To Locate `astyle` Executable Path During Testing
+    - Fix Improper Use Of bin_dir()
+    - Travis-CI, Enable Both share & system Tests (Thanks to plicease AKA Graham Ollis)
+    - MS Windows, Enable msys & install (Thanks to plicease AKA Graham Ollis)
+
 0.003000 2017-01-07
 
     - Use IPC::Cmd::can_run() To Locate `astyle` Executable Path During Installation

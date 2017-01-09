@@ -15,12 +15,13 @@ $ vi dist.ini
 $ vi Build.PL
     dist_version
 
-# CREATE DISTZILLA FILES
+# CREATE DISTZILLA FILES, IGNORE FAILURES
+$ Build realclean
 $ mv Build.PL Build.PL.manual
 $ rm MANIFEST
 $ dzil clean
 $ dzil release
-# CHEAT:    mv Build.PL Build.PL.manual; rm MANIFEST; dzil clean; dzil release
+# CHEAT:    Build realclean; mv Build.PL Build.PL.manual; rm MANIFEST; dzil clean; dzil release
 
 # FIX BROKEN DISTZILLA FILES
 $ ./script/dev/alien_astyle_uninstall.sh
