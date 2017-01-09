@@ -1,20 +1,22 @@
 use strict;
 use warnings;
-our $VERSION = 0.001_000;
+our $VERSION = 0.002_000;
 
-use Test::More tests => 6;
+use Test::More tests => 8;
 use File::Spec;
 use Capture::Tiny qw( capture_merged );
 use Env qw( @PATH );
+use IPC::Cmd qw(can_run);
 
 use_ok('Alien::astyle');
-
 unshift @PATH, Alien::astyle->bin_dir;
 
-my $version = [ split /\r?\n/, capture_merged {
-    system "astyle --version";
-}];
-#is($version_stderr, q{}, '`astyle --version` executes without displaying errors');
+# check if `astyle` can be run, if so get path to binary executable
+my $astyle_path = can_run('astyle');
+ok(defined $astyle_path, '`astyle` binary path is defined');
+isnt($astyle_path, q{}, '`astyle` binary path is not empty');
+
+my $version = [ split /\r?\n/, capture_merged { system "$astyle_path --version"; }];
 cmp_ok((scalar @{$version}), '==', 1, '`astyle --version` executes with 1 line of output');
 
 my $version_0 = $version->[0];
