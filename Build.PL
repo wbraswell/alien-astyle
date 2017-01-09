@@ -27,6 +27,7 @@ my $builder = My::ModuleBuild->new(
     alien_bin_requires => {
         'Alien::gmake' => '0.11',
     },
+    alien_msys => 1,
     configure_requires => {
         'Alien::Base::ModuleBuild' => 0.016,
         'Capture::Tiny'            => 0,
@@ -49,7 +50,7 @@ my $builder = My::ModuleBuild->new(
         "%{gmake} --directory=build/gcc CXX=$cxx"
     ],
     alien_install_commands => [
-        "%{gmake} --directory=build/gcc CXX=$cxx prefix=%s install"
+        "%{gmake} --directory=build/gcc CXX=$cxx INSTALL=install prefix=%s install"
     ],
     alien_name       => 'astyle',
     alien_repository => [
