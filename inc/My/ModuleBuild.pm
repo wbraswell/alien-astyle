@@ -7,7 +7,7 @@ use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
 
 use File::chdir;
-use Capture::Tiny qw( capture_stderr );
+use Capture::Tiny qw( capture_merged );
 use Data::Dumper;
 use IPC::Cmd qw(can_run);
 
@@ -20,29 +20,23 @@ sub alien_check_installed_version {
     }
 
     # run `astyle --version`, check for valid output
-    my $version_stdout;
-    my $version_stderr = capture_stderr {
-        $version_stdout = [`$astyle_path --version`];
-    };
-    if (($version_stderr ne q{}) and
-        ($version_stderr !~ m/an\'t\ exec/xms) and
-        ($version_stderr !~ m/o\ such\ file/xms) and
-        ($version_stderr !~ m/is\ not\ recognized/xms) and # MS Windows in AppVeyor
-        ($version_stderr !~ m/internal\ or\ external\ command/xms) # MS Windows in AppVeyor
-        ) {
+    my $version = [split /\r?\n/, capture_merged {
+        system "$astyle_path --version";
+    }];
+    if($? != 0) {
         print {*STDERR} 'WARNING WAAMBIV00: Alien::astyle experienced an unrecognized error while attempting to determine installed version...', 
-            "\n", $version_stderr, "\n", 'Trying to continue...', "\n";
+            "\n", $version, "\n", 'Trying to continue...', "\n";
     }
-    if ((scalar @{$version_stdout}) > 1) {
+    if ((scalar @{$version}) > 1) {
         print {*STDERR} 'WARNING WAAMBIV01: Alien::astyle received too much output while attempting to determine installed version...', 
-            "\n", Dumper($version_stdout), "\n", 'Trying to continue...', "\n";
+            "\n", Dumper($version), "\n", 'Trying to continue...', "\n";
     }
 
-#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version_stdout = ', Dumper($version_stdout), "\n";
-    my $version_stdout_0 = $version_stdout->[0];
-    if ((defined $version_stdout_0) and
-        ((substr $version_stdout_0, 0, 22) eq 'Artistic Style Version') and 
-        ($version_stdout_0 =~ m/([\d\.]+)$/xms)) {
+#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version = ', Dumper($version), "\n";
+    my $version_0 = $version->[0];
+    if ((defined $version_0) and
+        ((substr $version_0, 0, 22) eq 'Artistic Style Version') and 
+        ($version_0 =~ m/([\d\.]+)$/xms)) {
         my $version = $1;
 #        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
         return $version;

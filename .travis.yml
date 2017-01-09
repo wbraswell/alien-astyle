@@ -1,6 +1,11 @@
 language: perl
 # v0.004_000
 
+addons:
+  apt:
+    packages:
+      - astyle
+
 perl:
   - "5.8"
   - "5.10"
@@ -35,3 +40,7 @@ notifications:
     template:
       - "Alien::astyle build %{result}. %{author} says '%{commit_message}'"
       - "%{build_url} %{compare_url}"
+
+env:
+  - ALIEN_INSTALL_TYPE=share
+  - ALIEN_INSTALL_TYPE=system
