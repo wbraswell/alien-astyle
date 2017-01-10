@@ -1,3 +1,4 @@
+# v0.005_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -35,6 +36,8 @@ install:
     g++ -v
 
     perl -V
+
+    cpanm --verbose Alien::Base::ModuleBuild
 
     perl Build.PL
 
