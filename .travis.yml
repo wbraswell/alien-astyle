@@ -1,5 +1,5 @@
 language: perl
-# v0.005_000
+# v0.006_000
 
 addons:
     apt:
@@ -68,6 +68,8 @@ notifications:
         - "%{build_url} %{compare_url}"
 
 env:
-    - ALIEN_INSTALL_TYPE=share
-    - ALIEN_INSTALL_TYPE=system
-    - AUTHOR_TESTING=0
+    global:
+        - AUTHOR_TESTING=0
+    matrix:
+        - ALIEN_INSTALL_TYPE=share
+        - ALIEN_INSTALL_TYPE=system
