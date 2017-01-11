@@ -1,26 +1,52 @@
 language: perl
-# v0.004_000
+# v0.005_000
 
 addons:
-  apt:
-    packages:
-      - astyle
+    apt:
+        packages:
+            - astyle
 
 perl:
-  - "5.8"
-  - "5.10"
-  - "5.12"
-  - "5.14"
-  - "5.16"
-  - "5.18"
-  - "5.20"
-  - "5.22"
-  - "5.24"
+    - "5.8"
+    - "5.10"
+    - "5.12"
+    - "5.14"
+    - "5.16"
+    - "5.18"
+    - "5.20"
+    - "5.22"
+    - "5.24"
+    # version(s) below are built using Travis-CI Helper
+    - "5.25" 
+#    - "dev"  # same as 5.25 above
+    - "blead"
+
+# [ BEGIN Travis-CI Helper ]
+matrix:
+    allow_failures:
+        - perl: "blead"
+before_install:
+    - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+    - source ~/travis-perl-helpers/init
+    - build-perl
+    - perl -V
+
+# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
+# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
+# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
+#    - build-dist
+#    - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
+# [ END Travis-CI Helper ]
 
 install:
     # NEED ANSWER: why isn't A::B::MB auto-installed by --installdeps?
     - cpanm Alien::Base::ModuleBuild
     - cpanm --verbose --installdeps .
+
+# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
+# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
+# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
+    #- cpan-install --deps       # Travis-CI Helper: installs prereqs, including recommends
 
 script:
     - perl Build.PL
@@ -32,15 +58,15 @@ script:
 notifications:
   irc:
     channels:
-      - "irc.perl.org#perl11"
+        - "irc.perl.org#perl11"
     on_success: always
     on_failure: always
     # to enable skip_join, in IRC channel first execute `/mode -n`
     skip_join: true
     template:
-      - "Alien::astyle build %{result}. %{author} says '%{commit_message}'"
-      - "%{build_url} %{compare_url}"
+        - "Alien::astyle build %{result}. %{author} says '%{commit_message}'"
+        - "%{build_url} %{compare_url}"
 
 env:
-  - ALIEN_INSTALL_TYPE=share
-  - ALIEN_INSTALL_TYPE=system
+    - ALIEN_INSTALL_TYPE=share
+    - ALIEN_INSTALL_TYPE=system
