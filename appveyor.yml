@@ -1,4 +1,4 @@
-# v0.009_000
+# v0.010_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -40,19 +40,19 @@ install:
 
     perl -e"require CPAN;CPAN::Shell->notest('install','App::cpanminus');"
 
-    echo "pre-gmake ALIEN_INSTALL_TYPE=" %ALIEN_INSTALL_TYPE%
+    echo pre-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    ALIEN_INSTALL_TYPE_TMP=%ALIEN_INSTALL_TYPE%
+    set ALIEN_INSTALL_TYPE_TMP=%ALIEN_INSTALL_TYPE%
 
-    ALIEN_INSTALL_TYPE=system
+    set ALIEN_INSTALL_TYPE=system
 
-    echo "gmake ALIEN_INSTALL_TYPE=" %ALIEN_INSTALL_TYPE%
+    echo gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
     cpanm --verbose PLICEASE/Alien-gmake-0.15.tar.gz
 
-    ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
+    set ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
 
-    echo "post-gmake ALIEN_INSTALL_TYPE=" %ALIEN_INSTALL_TYPE%
+    echo post-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
     cpanm --verbose IO::Socket::SSL
 
