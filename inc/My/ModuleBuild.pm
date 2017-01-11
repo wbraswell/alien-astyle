@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.010_000;
+our $VERSION = 0.011_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -16,7 +16,7 @@ sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
     my $astyle_path = can_run('astyle');
     if (not defined $astyle_path) {
-#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), no `astyle` binary found, returning nothing', "\n";
+        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), no `astyle` binary found, returning nothing', "\n";
         return;
     }
 
@@ -31,17 +31,17 @@ sub alien_check_installed_version {
             "\n", Dumper($version), "\n", 'Trying to continue...', "\n";
     }
 
-#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version = ', Dumper($version), "\n";
+    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version = ', Dumper($version), "\n";
     my $version_0 = $version->[0];
     if ((defined $version_0) and
         ((substr $version_0, 0, 22) eq 'Artistic Style Version') and 
         ($version_0 =~ m/([\d\.]+)$/xms)) {
         my $version = $1;
-#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
+        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
         return $version;
     }
     else {
-#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning nothing', "\n";
+        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning nothing', "\n";
         return;
     }
 }
