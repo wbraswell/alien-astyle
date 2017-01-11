@@ -1,4 +1,4 @@
-# v0.011_000
+# v0.012_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -21,6 +21,14 @@ install:
     choco install astyle
 
     astyle --version
+
+    where astyle
+
+    where.exe astyle
+
+    where astyle.exe
+
+    where.exe astyle.exe
 
     choco install curl
 
