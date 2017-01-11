@@ -70,3 +70,4 @@ notifications:
 env:
     - ALIEN_INSTALL_TYPE=share
     - ALIEN_INSTALL_TYPE=system
+    - AUTHOR_TESTING=0
