@@ -40,7 +40,7 @@ before_install:
 
 install:
     # NEED ANSWER: why isn't A::B::MB auto-installed by --installdeps?
-    - cpanm Alien::Base::ModuleBuild
+    - cpanm --verbose Alien::Base::ModuleBuild
     - cpanm --verbose --installdeps .
 
 # NEED REMOVE FOLLOWING 1 LINE IF NOT USED
