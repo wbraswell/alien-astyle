@@ -22,7 +22,7 @@ my $builder = My::ModuleBuild->new(
     module_name        => 'Alien::astyle',
     dist_abstract      => 'Build & Install the Artistic Style Code Formatter',
     dist_author        => 'William N. Braswell, Jr. <wbraswell@cpan.org>',
-    dist_version       => '0.004000',
+    dist_version       => '0.005000',
     license            => 'perl',
     alien_bin_requires => {
         'Alien::gmake' => '0.11',
@@ -30,7 +30,7 @@ my $builder = My::ModuleBuild->new(
     alien_msys => 1,
     configure_requires => {
         # DEV NOTE, CORRELATION #aa001: must install IO::Socket::SSL & Alien::Base::ModuleBuild from Build.PL (which becomes META.json, for CPAN) & .travis.yml & appveyor.yml 
-        'IO::Socket::SSL'          => '2.043',  # Travis-CI Helper: the fresh Perl installs need this
+        'IO::Socket::SSL'          => '2.043',
         'Alien::Base::ModuleBuild' => '0.016',
         'Capture::Tiny'            => '0',
         'IPC::Cmd'                 => '0.96',

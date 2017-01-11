@@ -1,5 +1,9 @@
 Revision history for Alien::astyle.
 
+0.005000 2017-01-11
+
+    - Include IO::Socket::SSL Dependency, May Be Missing On Fresh Perl Installs
+
 0.004000 2017-01-09
 
     - Use IPC::Cmd::can_run() To Locate `astyle` Executable Path During Testing

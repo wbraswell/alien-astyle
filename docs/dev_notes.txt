@@ -16,6 +16,7 @@ $ vi Build.PL
     dist_version
 
 # CREATE DISTZILLA FILES, IGNORE FAILURES
+# Could not find any matching files at Alien/Base/ModuleBuild.pm line 382.  Can't call method "version" on an undefined value at Alien/Base/ModuleBuild.pm line 391.
 $ Build realclean
 $ mv Build.PL Build.PL.manual
 $ rm MANIFEST
