@@ -1,5 +1,5 @@
 language: perl
-# v0.006_000
+# v0.008_000
 
 addons:
     apt:
@@ -41,6 +41,7 @@ before_install:
 install:
     # NEED ANSWER: why isn't A::B::MB auto-installed by --installdeps?
     - cpanm --verbose Alien::Base::ModuleBuild
+    - cpanm --verbose IO::Socket::SSL  # Travis-CI Helper: the fresh Perl installs need this
     - cpanm --verbose --installdeps .
 
 # NEED REMOVE FOLLOWING 1 LINE IF NOT USED
