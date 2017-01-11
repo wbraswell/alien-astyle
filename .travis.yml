@@ -1,5 +1,5 @@
 language: perl
-# v0.009_000
+# v0.010_000
 
 addons:
     apt:
@@ -7,14 +7,14 @@ addons:
             - astyle
 
 perl:
-#    - "5.8"
-#    - "5.10"
-#    - "5.12"
-#    - "5.14"
-#    - "5.16"
-#    - "5.18"
-#    - "5.20"
-#    - "5.22"
+    - "5.8"
+    - "5.10"
+    - "5.12"
+    - "5.14"
+    - "5.16"
+    - "5.18"
+    - "5.20"
+    - "5.22"
     - "5.24"
     # version(s) below are built using Travis-CI Helper
     - "5.25" 
@@ -31,9 +31,7 @@ before_install:
     - build-perl
     - perl -V
 
-# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
-# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
-# NEED REMOVE FOLLOWING 2 LINES IF NOT USED
+# NEED UPGRADE: use build-dist instead of cpanm calls below?
 #    - build-dist
 #    - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 # [ END Travis-CI Helper ]
@@ -43,11 +41,6 @@ install:
     - cpanm --verbose IO::Socket::SSL
     - cpanm --verbose Alien::Base::ModuleBuild
     - cpanm --verbose --installdeps .
-
-# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
-# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
-# NEED REMOVE FOLLOWING 1 LINE IF NOT USED
-    #- cpan-install --deps       # Travis-CI Helper: installs prereqs, including recommends
 
 script:
     - perl Build.PL
