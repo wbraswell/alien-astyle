@@ -1,4 +1,4 @@
-# v0.005_000
+# v0.006_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -37,11 +37,13 @@ install:
 
     perl -V
 
+    perl -e"require CPAN;CPAN::Shell->notest('install','App::cpanminus');"
+
+    cpanm --verbose Alien::gmake
+
     cpanm --verbose Alien::Base::ModuleBuild
 
     perl Build.PL
-
-    perl -e"require CPAN;CPAN::Shell->notest('install','App::cpanminus');"
 
     cpanm --verbose --installdeps .
 
