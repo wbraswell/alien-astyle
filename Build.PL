@@ -22,29 +22,30 @@ my $builder = My::ModuleBuild->new(
     module_name        => 'Alien::astyle',
     dist_abstract      => 'Build & Install the Artistic Style Code Formatter',
     dist_author        => 'William N. Braswell, Jr. <wbraswell@cpan.org>',
-    dist_version       => 0.004_000,
+    dist_version       => '0.004000',
     license            => 'perl',
     alien_bin_requires => {
         'Alien::gmake' => '0.11',
     },
     alien_msys => 1,
     configure_requires => {
-        'Alien::Base::ModuleBuild' => 0.016,
-        'Capture::Tiny'            => 0,
-        'IPC::Cmd'                 => 0.96,
-        'File::ShareDir'           => 1.03,
-        'File::chdir'              => 0,
-        'perl'                     => 5.008
+        'IO::Socket::SSL'          => '2.043',  # Travis-CI Helper: the fresh Perl installs need this
+        'Alien::Base::ModuleBuild' => '0.016',
+        'Capture::Tiny'            => '0',
+        'IPC::Cmd'                 => '0.96',
+        'File::ShareDir'           => '1.03',
+        'File::chdir'              => '0',
+        'perl'                     => '5.008'
     },
     test_requires        => {
-        'Test::More' => "0.94",
-        'perl'       => "5.006"
+        'Test::More' => '0.94',
+        'perl'       => '5.006'
     },
     requires => {
         'perl'           => '5.8.0',
-        'parent'         => 0,
-        'Alien::Base'    => 0,
-        'File::ShareDir' => 1.03,
+        'parent'         => '0',
+        'Alien::Base'    => '0',
+        'File::ShareDir' => '1.03',
     },
     alien_build_commands => [
         "%{gmake} --directory=build/gcc CXX=$cxx"
