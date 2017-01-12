@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.012_000;
+our $VERSION = 0.013_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -15,6 +15,7 @@ use English qw(-no_match_vars);  # for $CHILD_ERROR & $OSNAME
 sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
     my $astyle_path = undef;
+    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
     if ($OSNAME eq 'MSWin32') {
         $astyle_path = can_run('AStyle.exe');
     }
