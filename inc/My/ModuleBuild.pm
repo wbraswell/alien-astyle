@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.011_000;
+our $VERSION = 0.012_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -10,11 +10,18 @@ use File::chdir;
 use Capture::Tiny qw( capture_merged );
 use Data::Dumper;
 use IPC::Cmd qw(can_run);
-use English qw(-no_match_vars);  # for $CHILD_ERROR
+use English qw(-no_match_vars);  # for $CHILD_ERROR & $OSNAME
 
 sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
-    my $astyle_path = can_run('astyle');
+    my $astyle_path = undef;
+    if ($OSNAME eq 'MSWin32') {
+        $astyle_path = can_run('AStyle.exe');
+    }
+    else {
+        $astyle_path = can_run('astyle');
+    }
+
     if (not defined $astyle_path) {
         print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), no `astyle` binary found, returning nothing', "\n";
         return;

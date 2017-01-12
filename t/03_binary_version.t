@@ -1,18 +1,25 @@
 use strict;
 use warnings;
-our $VERSION = 0.002_000;
+our $VERSION = 0.003_000;
 
 use Test::More tests => 8;
 use File::Spec;
 use Capture::Tiny qw( capture_merged );
 use Env qw( @PATH );
 use IPC::Cmd qw(can_run);
+use English qw(-no_match_vars);  # for $OSNAME
 
 use_ok('Alien::astyle');
 unshift @PATH, Alien::astyle->bin_dir;
 
 # check if `astyle` can be run, if so get path to binary executable
-my $astyle_path = can_run('astyle');
+my $astyle_path = undef;
+if ($OSNAME eq 'MSWin32') {
+    $astyle_path = can_run('AStyle.exe');
+}
+else {
+    $astyle_path = can_run('astyle');
+}
 ok(defined $astyle_path, '`astyle` binary path is defined');
 isnt($astyle_path, q{}, '`astyle` binary path is not empty');
 
