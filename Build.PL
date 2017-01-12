@@ -25,7 +25,7 @@ my $builder = My::ModuleBuild->new(
     dist_version       => '0.006000',
     license            => 'perl',
     alien_bin_requires => {
-        'Alien::gmake' => '0.11',
+        'Alien::gmake' => '0.15',
     },
     alien_msys => 1,
     configure_requires => {

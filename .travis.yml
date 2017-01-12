@@ -1,5 +1,5 @@
 language: perl
-# v0.010_000
+# v0.011_000
 
 addons:
     apt:
@@ -37,6 +37,8 @@ before_install:
 # [ END Travis-CI Helper ]
 
 install:
+    # NEED REMOVE when production release is made
+    - cpanm --verbose Alien::gmake@0.15_01
     # DEV NOTE, CORRELATION #aa001: must install IO::Socket::SSL & Alien::Base::ModuleBuild from Build.PL (which becomes META.json, for CPAN) & .travis.yml & appveyor.yml 
     - cpanm --verbose IO::Socket::SSL
     - cpanm --verbose Alien::Base::ModuleBuild
