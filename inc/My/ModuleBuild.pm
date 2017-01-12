@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.016_000;
+our $VERSION = 0.017_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -11,17 +11,19 @@ use Capture::Tiny qw( capture_merged );
 use Data::Dumper;
 use IPC::Cmd qw(can_run);
 use English qw(-no_match_vars);  # for $CHILD_ERROR & $OSNAME
+use Env qw( @PATH );
 
 sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
     my $astyle_path = undef;
     print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH} = ', Dumper($ENV{PATH}), "\n";
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH_SAVED} = ', Dumper($ENV{PATH_SAVED}), "\n";
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have %ENV = ', Dumper(\%ENV), "\n";
+    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH_FULL} = ', Dumper($ENV{PATH_FULL}), "\n";
+    # DEV NOTE: when AppVeyor uses Chocolatey to install Strawberry Perl, it overwrites %path%, so we must save %PATH_FULL% and restore it here
+    if ((exists $ENV{PATH_FULL}) and (defined $ENV{PATH_FULL}) and ($ENV{PATH_FULL} ne q{})) {
+        unshift @PATH, $ENV{PATH_FULL};
+    }
     if ($OSNAME eq 'MSWin32') {
-        $astyle_path = capture_merged { system 'where.exe astyle.exe'; };
-#        $astyle_path = can_run('AStyle.exe');
+        $astyle_path = can_run('AStyle.exe');
     }
     else {
         $astyle_path = can_run('astyle');
