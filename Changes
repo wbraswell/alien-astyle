@@ -1,5 +1,11 @@
 Revision history for Alien::astyle.
 
+0.006000 2017-01-12
+
+    - MS Windows, Utilize AStyle.exe Executable File
+    - Perl v5.25 Support
+    - Travis-CI & AppVeyor, 100% Tests Pass
+
 0.005000 2017-01-11
 
     - Include IO::Socket::SSL Dependency, May Be Missing On Fresh Perl Installs
