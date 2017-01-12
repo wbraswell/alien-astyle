@@ -1,4 +1,4 @@
-# v0.018_000
+# v0.019_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -12,7 +12,7 @@ environment:
         - ALIEN_INSTALL_TYPE: share
 
         # system test, uses astyle from chocolatey
-        - ALIEN_INSTALL_TYPE: system
+#        - ALIEN_INSTALL_TYPE: system
 
 # DEV NOTE, CORRELATION #aa001: must install IO::Socket::SSL & Alien::Base::ModuleBuild from Build.PL (which becomes META.json, for CPAN) & .travis.yml & appveyor.yml 
 install:
@@ -54,21 +54,33 @@ install:
 
     echo gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --verbose Alien::MSYS
+    cpanm --notest Alien::MSYS
 
-    cpanm --verbose Alien::gmake
+    cpanm --notest Alien::gmake
 
     set ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
 
     echo post-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --verbose IO::Socket::SSL
+    cpanm --notest IO::Socket::SSL
+
+    curl -O https://github.com/wbraswell/Alien-Base/archive/master.zip
+
+    unzip master.zip
+
+    cd Alien-Base*
+
+    perl Build.PL
+
+    Build test
+
+    Build install
 
     cpanm --verbose Alien::Base::ModuleBuild
 
     perl Build.PL
 
-    cpanm --verbose --installdeps .
+    cpanm --notest --installdeps .
 
     set PERL5LIB=blib;lib
 
