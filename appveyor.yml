@@ -1,4 +1,4 @@
-# v0.021_000
+# v0.022_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -23,10 +23,6 @@ install:
     astyle --version
 
     where.exe astyle.exe
-
-    set PATH_FULL=%path%
-
-    echo %PATH_FULL%
 
     choco install curl
 
@@ -63,18 +59,6 @@ install:
     echo post-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
     cpanm --notest IO::Socket::SSL
-
-    curl -O https://github.com/wbraswell/Alien-Base/archive/master.zip
-
-    unzip master.zip
-
-    cd Alien-Base-master
-
-    perl Build.PL
-
-    Build test
-
-    Build install
 
     cpanm --verbose Alien::Base::ModuleBuild
 

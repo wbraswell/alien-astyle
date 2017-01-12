@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.018_000;
+our $VERSION = 0.022_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -17,11 +17,6 @@ sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
     my $astyle_path = undef;
 #    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
-#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH_FULL} = ', Dumper($ENV{PATH_FULL}), "\n";
-    # DEV NOTE: MS Windows, when AppVeyor uses Chocolatey to install Strawberry Perl, it overwrites %path%, so we must save %PATH_FULL% and restore it here
-    if ((exists $ENV{PATH_FULL}) and (defined $ENV{PATH_FULL}) and ($ENV{PATH_FULL} ne q{})) {
-        unshift @PATH, $ENV{PATH_FULL};
-    }
     if ($OSNAME eq 'MSWin32') {
         $astyle_path = can_run('AStyle.exe');
     }
