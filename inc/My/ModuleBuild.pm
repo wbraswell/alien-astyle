@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.013_000;
+our $VERSION = 0.014_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -17,7 +17,8 @@ sub alien_check_installed_version {
     my $astyle_path = undef;
     print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
     if ($OSNAME eq 'MSWin32') {
-        $astyle_path = can_run('AStyle.exe');
+        $astyle_path = capture_merged { system 'where.exe astyle.exe'; };
+#        $astyle_path = can_run('AStyle.exe');
     }
     else {
         $astyle_path = can_run('astyle');
@@ -27,6 +28,8 @@ sub alien_check_installed_version {
         print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), no `astyle` binary found, returning nothing', "\n";
         return;
     }
+
+    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $astyle_path = ', q{'}, $astyle_path, q{'}, "\n";
 
     # run `astyle --version`, check for valid output
     my $version = [split /\r?\n/, capture_merged { system "$astyle_path --version"; }];
