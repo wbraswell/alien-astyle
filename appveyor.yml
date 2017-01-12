@@ -1,4 +1,4 @@
-# v0.013_000
+# v0.014_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -9,7 +9,7 @@ clone_folder: C:\projects\alien-astyle
 environment:
     matrix:
         # share test, compile astyle from source
-        - ALIEN_INSTALL_TYPE: share
+#        - ALIEN_INSTALL_TYPE: share
 
         # system test, uses astyle from chocolatey
         - ALIEN_INSTALL_TYPE: system
@@ -50,17 +50,17 @@ install:
 
     echo gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --verbose Alien::MSYS
+    cpanm --notest Alien::MSYS
 
-    cpanm --verbose PLICEASE/Alien-gmake-0.15.tar.gz
+    cpanm --notest Alien::gmake
 
     set ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
 
     echo post-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --verbose IO::Socket::SSL
+    cpanm --notest IO::Socket::SSL
 
-    cpanm --verbose Alien::Base::ModuleBuild
+    cpanm --notest Alien::Base::ModuleBuild
 
     perl Build.PL
 
