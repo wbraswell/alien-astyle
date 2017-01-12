@@ -1,4 +1,4 @@
-# v0.017_000
+# v0.018_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -9,7 +9,7 @@ clone_folder: C:\projects\alien-astyle
 environment:
     matrix:
         # share test, compile astyle from source
-#        - ALIEN_INSTALL_TYPE: share
+        - ALIEN_INSTALL_TYPE: share
 
         # system test, uses astyle from chocolatey
         - ALIEN_INSTALL_TYPE: system
@@ -23,8 +23,6 @@ install:
     astyle --version
 
     where.exe astyle.exe
-
-    echo %path%
 
     set PATH_FULL=%path%
 
@@ -46,7 +44,7 @@ install:
 
     perl -V
 
-    perl -e"require CPAN;CPAN::Shell->notest('install','App::cpanminus');"
+    perl -e"require CPAN;CPAN::Shell->verbose('install','App::cpanminus');"
 
     echo pre-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
@@ -56,17 +54,17 @@ install:
 
     echo gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --notest Alien::MSYS
+    cpanm --verbose Alien::MSYS
 
-    cpanm --notest Alien::gmake
+    cpanm --verbose Alien::gmake
 
     set ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
 
     echo post-gmake ALIEN_INSTALL_TYPE = %ALIEN_INSTALL_TYPE%
 
-    cpanm --notest IO::Socket::SSL
+    cpanm --verbose IO::Socket::SSL
 
-    cpanm --notest Alien::Base::ModuleBuild
+    cpanm --verbose Alien::Base::ModuleBuild
 
     perl Build.PL
 

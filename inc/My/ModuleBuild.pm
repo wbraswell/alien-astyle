@@ -1,7 +1,7 @@
 package My::ModuleBuild;
 use strict;
 use warnings;
-our $VERSION = 0.017_000;
+our $VERSION = 0.018_000;
 
 use Alien::Base::ModuleBuild;
 use base qw( Alien::Base::ModuleBuild );
@@ -16,9 +16,9 @@ use Env qw( @PATH );
 sub alien_check_installed_version {
     # check if `astyle` can be run, if so get path to binary executable
     my $astyle_path = undef;
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH_FULL} = ', Dumper($ENV{PATH_FULL}), "\n";
-    # DEV NOTE: when AppVeyor uses Chocolatey to install Strawberry Perl, it overwrites %path%, so we must save %PATH_FULL% and restore it here
+#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $OSNAME = ', $OSNAME, "\n";
+#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $ENV{PATH_FULL} = ', Dumper($ENV{PATH_FULL}), "\n";
+    # DEV NOTE: MS Windows, when AppVeyor uses Chocolatey to install Strawberry Perl, it overwrites %path%, so we must save %PATH_FULL% and restore it here
     if ((exists $ENV{PATH_FULL}) and (defined $ENV{PATH_FULL}) and ($ENV{PATH_FULL} ne q{})) {
         unshift @PATH, $ENV{PATH_FULL};
     }
@@ -34,7 +34,7 @@ sub alien_check_installed_version {
         return;
     }
 
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $astyle_path = ', q{'}, $astyle_path, q{'}, "\n";
+#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $astyle_path = ', q{'}, $astyle_path, q{'}, "\n";
 
     # run `astyle --version`, check for valid output
     my $version = [split /\r?\n/, capture_merged { system "$astyle_path --version"; }];
@@ -47,17 +47,17 @@ sub alien_check_installed_version {
             "\n", Dumper($version), "\n", 'Trying to continue...', "\n";
     }
 
-    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version = ', Dumper($version), "\n";
+#    print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), have $version = ', Dumper($version), "\n";
     my $version_0 = $version->[0];
     if ((defined $version_0) and
         ((substr $version_0, 0, 22) eq 'Artistic Style Version') and 
         ($version_0 =~ m/([\d\.]+)$/xms)) {
         my $version = $1;
-        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
+#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning $version = ', $version, "\n";
         return $version;
     }
     else {
-        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning nothing', "\n";
+#        print {*STDERR} '<<< DEBUG >>>: in ModuleBuild::alien_check_installed_version(), returning nothing', "\n";
         return;
     }
 }
