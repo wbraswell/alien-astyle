@@ -1,4 +1,4 @@
-# v0.015_000
+# v0.016_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -25,6 +25,10 @@ install:
     where.exe astyle.exe
 
     echo %path%
+
+    set PATH_SAVED=%path%
+
+    echo %PATH_SAVED%
 
     choco install curl
 
@@ -63,6 +67,8 @@ install:
     cpanm --notest IO::Socket::SSL
 
     cpanm --notest Alien::Base::ModuleBuild
+
+    echo %PATH_SAVED%
 
     perl Build.PL
 
