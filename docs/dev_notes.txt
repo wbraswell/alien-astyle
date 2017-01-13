@@ -28,11 +28,13 @@ $ dzil release
 $ ./script/dev/alien_astyle_uninstall.sh
 $ cd Alien-astyle-*
 $ rm Makefile.PL
+# NEED ANSWER: why is appveyor.yml not properly excluded by MANIFEST.SKIP?
+$ rm appveyor.yml
 $ vi MANIFEST
     remove Makefile.PL
 $ rm Build.PL
 $ cp ../Build.PL.manual ./Build.PL
-# CHEAT:    ./script/dev/alien_astyle_uninstall.sh; cd Alien-astyle-*; rm Makefile.PL; vi MANIFEST; rm Build.PL; cp ../Build.PL.manual ./Build.PL
+# CHEAT:    ./script/dev/alien_astyle_uninstall.sh; cd Alien-astyle-*; rm Makefile.PL; rm appveyor.yml; vi MANIFEST; rm Build.PL; cp ../Build.PL.manual ./Build.PL
 
 # TEST FIXED DISTZILLA FILES
 $ perl Build.PL

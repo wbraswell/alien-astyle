@@ -1,4 +1,4 @@
-# v0.026_000
+# v0.027_000
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: false
@@ -14,7 +14,6 @@ environment:
         # system test, uses astyle from chocolatey
         - ALIEN_INSTALL_TYPE: system
 
-# NEED REMOVE HARD-CODED gmake version when production release is made
 # DEV NOTE, CORRELATION #aa001: must install IO::Socket::SSL & Alien::Base::ModuleBuild from Build.PL (which becomes META.json, for CPAN) & .travis.yml & appveyor.yml 
 # DEV NOTE: do not test IO::Socket::SSL, about 50% of the time it hangs on the test after "t/sysread_write.t ................. ok"
 install:
@@ -54,7 +53,7 @@ install:
 
     cpanm --verbose Alien::MSYS
 
-    cpanm --verbose Alien::gmake@0.15_01
+    cpanm --verbose Alien::gmake
 
     set ALIEN_INSTALL_TYPE=%ALIEN_INSTALL_TYPE_TMP%
 

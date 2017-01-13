@@ -1,5 +1,10 @@
 Revision history for Alien::astyle.
 
+0.007000 2017-01-13 Codename Bond, James Bond
+
+    - Upgrade To Alien::gmake v0.17
+    - Perl v5.8 Minimum Required
+
 0.006000 2017-01-12
 
     - MS Windows, Utilize AStyle.exe Executable File
