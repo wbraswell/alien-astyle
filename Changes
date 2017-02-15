@@ -1,5 +1,10 @@
 Revision history for Alien::astyle.
 
+0.008000 2017-02-14 Codename Casanova
+
+    - HOLIDAY EDITION: Happy Valentine's Day!
+    - Upgrade To Alien::Base 0.032
+
 0.007000 2017-01-13 Codename Bond, James Bond
 
     - Upgrade To Alien::gmake v0.17
