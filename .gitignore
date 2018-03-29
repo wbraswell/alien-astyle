@@ -13,8 +13,9 @@
 # NEED UPDATE, CORRELATION #aa000: list of CPAN files & directories to delete/exclude in .gitignore, and MANIFEST.SKIP
 # MANIFEST.SKIP is not auto-generated, do not exclude
 # MANIFEST is auto-generated, but `perl Build.PL` complains without it, do not exclude
+# META.* are required for build dependencies, do not exclude, git only
 /MANIFEST.bak
-/META.*
+#/META.*
 /MYMETA.*
 /Build
 /Build.old

@@ -1,9 +1,26 @@
+# Alien::astyle Developer Notes 20180328 2018.087
+
 ##########################################################################################
 # CPAN DISTRIBUTION
 ##########################################################################################
 
 # DEV NOTE: dist.ini uses Dist::Zilla to interface with PAUSE & CPAN
 # Build.PL uses Module::Builder???
+
+# INSTALL BUILD PREREQUISITES
+$ cpanm Dist::Zilla
+$ cpanm Dist::Zilla::Plugin::Alien
+$ cpanm Alien::Build
+$ cpanm Alien::gmake
+
+# CLEAN PERL5LIB
+$ perl -e 'use Alien::astyle;'
+# EXAMPLE ERROR: unable to find dist share directory for Alien-astyle
+$ set | grep PERL5LIB
+# copy-paste PERL5LIB
+# move "blib/lib" and "lib" entries to very end of PERL5LIB, after "~/perl5/lib/perl5" or other location of share dir
+$ export PERL5LIB=...:~/perl5/lib/perl5:blib/lib:lib
+$ perl -e 'use Alien::astyle;'
 
 # UPDATE VERSION NUMBERS
 $ vi Changes
@@ -16,13 +33,14 @@ $ vi Build.PL
     dist_version
 
 # CREATE DISTZILLA FILES, IGNORE FAILURES
-# No command 'Build' found, did you mean
-# Could not find any matching files at Alien/Base/ModuleBuild.pm line 382.  Can't call method "version" on an undefined value at Alien/Base/ModuleBuild.pm line 391.
+# EXAMPLE ERROR: No command 'Build' found, did you mean
+# EXAMPLE ERROR: Could not find any matching files at Alien/Base/ModuleBuild.pm line 382.  Can't call method "version" on an undefined value at Alien/Base/ModuleBuild.pm line 391.
 $ Build realclean
 $ mv Build.PL Build.PL.manual
 $ rm MANIFEST
 $ dzil clean
 $ dzil release
+# NEED FIX: unable to find dist share directory for Alien-astyle
 # CHEAT:    Build realclean; mv Build.PL Build.PL.manual; rm MANIFEST; dzil clean; dzil release
 
 # FIX BROKEN DISTZILLA FILES
@@ -32,6 +50,7 @@ $ rm Makefile.PL
 # NEED ANSWER: why is appveyor.yml not properly excluded by MANIFEST.SKIP?
 $ rm appveyor.yml
 $ vi MANIFEST
+    remove appveyor.yml
     remove Makefile.PL
 $ rm Build.PL
 $ cp ../Build.PL.manual ./Build.PL
